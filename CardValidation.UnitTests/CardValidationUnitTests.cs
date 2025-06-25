@@ -3,7 +3,7 @@ using Xunit;
 using CardValidation.Core.Services;
 using CardValidation.Core.Enums;
 
-namespace CardValidation.Tests
+namespace CardValidation.UnitTests
 {
     public class CardValidationServiceTests
     {
@@ -12,7 +12,7 @@ namespace CardValidation.Tests
         // Check if the card number format matches any known type (Visa, MasterCard, American Express).
         [Theory]
         [InlineData("4539682995824395", true)]   // Visa
-        [InlineData("5105105105105100", true)]   // MasterCard (51–55 range)
+        [InlineData("5105105105105100", true)]   // MasterCard (51ï¿½55 range)
         [InlineData("2221000000000009", true)]   // MasterCard (2221+ range)
         [InlineData("378282246310005", true)]    // American Express
         [InlineData("6011111111111117", false)]  // Discover
