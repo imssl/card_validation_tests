@@ -23,8 +23,12 @@ jobs:
       - name: Build solution
         run: dotnet build --no-restore --configuration Release
 
-      - name: Run all tests and collect results
-        run: dotnet test CardValidation.sln --no-build --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+      - name: Run unit tests
+        run: dotnet test ./CardValidation.UnitTests/CardValidation.UnitTests.csproj --no-build --configuration Release --logger "trx;LogFileName=unit-test-results.trx" --results-directory ./TestResults
+
+      - name: Run integration tests
+        run: dotnet test ./CardValidation.IntegrationTests/CardValidation.IntegrationTests.csproj --no-build --configuration Release --logger "trx;LogFileName=integration-test-results.trx" --results-directory ./TestResults
+
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
