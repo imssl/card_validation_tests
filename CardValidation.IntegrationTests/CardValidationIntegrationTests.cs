@@ -10,12 +10,11 @@ using CardValidation.Core.Enums;
 
 namespace CardValidation.IntegrationTests
 {
-    // simple integration tests for the API, no fixtures
-    public class CardValidationApiTests
+    public class CardValidationIntegrationTests
     {
         private readonly HttpClient _client;
 
-        public CardValidationApiTests()
+        public CardValidationIntegrationTests()
         {
             var factory = new WebApplicationFactory<Program>();
             _client = factory.CreateClient();
