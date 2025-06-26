@@ -1,4 +1,4 @@
-# Rivery QA Assignment Submission
+# Riverty QA Assignment Submission
 
 Task: https://github.com/manmarriverty/qa-home-assignment/tree/main
 
