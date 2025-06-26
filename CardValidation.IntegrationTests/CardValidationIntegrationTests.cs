@@ -10,17 +10,29 @@ using CardValidation.Core.Enums;
 
 namespace CardValidation.IntegrationTests
 {
+    /// <summary>
+    /// Send HTTP requests to the card validation API.
+    /// Covers valid and invalid cases for different card inputs and expected responses.
+    /// </summary>
     public class CardValidationIntegrationTests
     {
+        /// <summary>
+        /// Client used to send HTTP requests to the API during tests.
+        /// </summary>
         private readonly HttpClient _client;
 
+        /// <summary>
+        /// Initialize the test server and HTTP client instance.
+        /// </summary>
         public CardValidationIntegrationTests()
         {
             var factory = new WebApplicationFactory<Program>();
             _client = factory.CreateClient();
         }
 
-        // valid Visa should succeed
+        /// <summary>
+        /// Send a valid Visa card and expects a successful response with the Visa identifier.
+        /// </summary>
         [Fact]
         public async Task Visa_card_returns_Visa()
         {
@@ -30,7 +42,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(((int)PaymentSystemType.Visa).ToString(), await resp.Content.ReadAsStringAsync());
         }
 
-        // valid MasterCard should succeed
+        /// <summary>
+        /// Send a valid MasterCard and expects a successful response with the MasterCard identifier.
+        /// </summary>
         [Fact]
         public async Task MasterCard_returns_MasterCard()
         {
@@ -40,7 +54,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(((int)PaymentSystemType.MasterCard).ToString(), await resp.Content.ReadAsStringAsync());
         }
 
-        // garbage number should get 400
+        /// <summary>
+        /// Send a card with a non-numeric number and expects a bad request response.
+        /// </summary>
         [Fact]
         public async Task Garbage_number_returns_BadRequest()
         {
@@ -49,7 +65,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
         }
 
-        // empty owner should get 400
+        /// <summary>
+        /// Send a card with an empty owner name and expects a bad request response.
+        /// </summary>
         [Fact]
         public async Task Empty_owner_returns_BadRequest()
         {
@@ -58,7 +76,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
         }
 
-        // expired date should get 400
+        /// <summary>
+        /// Send a card with an expired date and expects a bad request response.
+        /// </summary>
         [Fact]
         public async Task Expired_date_returns_BadRequest()
         {
@@ -67,7 +87,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
         }
 
-        // owner with digits should get 400
+        /// <summary>
+        /// Send a card where the owner's name contains digits and expects a bad request response.
+        /// </summary>
         [Fact]
         public async Task Owner_with_digits_returns_BadRequest()
         {
@@ -76,7 +98,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
         }
 
-        // wrong cvv length should get 400
+        /// <summary>
+        /// Send a card with an invalid CVC length and expects a bad request response.
+        /// </summary>
         [Fact]
         public async Task Wrong_cvv_length_returns_BadRequest()
         {
@@ -85,7 +109,9 @@ namespace CardValidation.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
         }
 
-        // multiple issues should get 400
+        /// <summary>
+        /// Send a card with multiple invalid fields and expects a bad request response.
+        /// </summary>
         [Fact]
         public async Task Multiple_bad_fields_return_BadRequest()
         {
