@@ -32,7 +32,7 @@ namespace CardValidation.UnitTests
         }
 
         /// <summary>
-        /// Ensures service maps valid numbers to correct payment system type.
+        /// Ensure service maps valid numbers to correct payment system type.
         /// </summary>
         [Theory]
         [InlineData("4539682995824395", PaymentSystemType.Visa)]
@@ -45,7 +45,7 @@ namespace CardValidation.UnitTests
         }
 
         /// <summary>
-        /// Asserts that an unsupported prefix triggers a NotImplementedException.
+        /// Assert that an unsupported prefix triggers a NotImplementedException.
         /// </summary>
         [Fact]
         public void GetPaymentSystemType_InvalidNumber_Throws()
