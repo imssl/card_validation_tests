@@ -1,26 +1,33 @@
-name: docker-tests
+name: Run tests with Docker
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: build image + run tests
-      run: docker build -t cardvalidation-tests .
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
 
-    - name: copy test results out
-      run: |
-        cid=$(docker create cardvalidation-tests)
-        docker cp "$cid":/artifacts ./artifacts
-        docker rm "$cid"
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: ./artifacts
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run all tests and collect results
+        run: dotnet test --no-build --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ./TestResults
