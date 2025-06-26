@@ -17,10 +17,11 @@ This project contains automated tests for the relevant app, including:
   
 Test setup uses simple `xUnit`, `HttpClient`, and `dotnet test` CLI tooling.
 It is also integrated with GitHub Actions for CI, and includes test result artifacts.
+VSCode and VS2022 are used as IDE during the development.
 
 ---
 
-## How to Run the Tests without Visual Studio
+## Running tests through CLI
 In project root folder:
 ```bash
 # Build the solution
