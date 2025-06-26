@@ -84,5 +84,5 @@ Triggers with any git push to main branch. Pipeline:
 
 ## Further Improvements
 
-Due to limited my limited time and full-time work, I couldn't work on the edge cases as much as I desired.
+Due to my limited time due to public holiday and full-time work, I couldn't work on the edge cases as much as I desired.
 I would include more integration tests as improvement.
