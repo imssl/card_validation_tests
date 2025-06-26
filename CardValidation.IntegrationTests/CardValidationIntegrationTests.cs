@@ -19,7 +19,7 @@ namespace CardValidation.IntegrationTests
         /// <summary>
         /// Client used to send HTTP requests to the API during tests.
         /// </summary>
-        private readonly HttpClient _client;
+        private HttpClient _client;
 
         /// <summary>
         /// Initialize the test server and HTTP client instance.
