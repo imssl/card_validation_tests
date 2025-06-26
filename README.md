@@ -20,7 +20,7 @@ It is also integrated with GitHub Actions for CI, and includes test result artif
 
 ---
 
-## How to Run Locally
+## How to Run the Tests without Visual Studio
 In project root folder:
 ```bash
 # Build the solution
