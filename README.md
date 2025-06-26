@@ -1,4 +1,4 @@
-# QA Home Assignment Submission.
+# QA Home Assignment Submission
 
 Thank you for opportunity to submit this assignment below:
 https://github.com/manmarriverty/qa-home-assignment/tree/main
