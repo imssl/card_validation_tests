@@ -80,3 +80,9 @@ Triggers with any git push to main branch. Pipeline:
 2. Runs both unit and integration tests
 3. Uploads .trx test result files in a .zip file as a downloadable artifact
 
+---
+
+## Further Improvements
+
+Due to limited my limited time and full-time work, I couldn't work on the edge cases as much as I desired.
+I would include more integration tests as improvement.
