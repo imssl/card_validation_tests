@@ -1,4 +1,7 @@
-# 🧪 CardValidation Test Suite
+# QA Home Assignment Submission.
+
+Thank you for opportunity to submit this assignment below:
+https://github.com/manmarriverty/qa-home-assignment/tree/main
 
 This project contains automated tests for the **CardValidation** API, including:
 
@@ -16,7 +19,7 @@ It is also integrated with GitHub Actions for CI, and includes test result artif
 
 ---
 
-## 📥 How to Run Locally
+## How to Run Locally
 In project root folder:
 ```bash
 # Build the solution
@@ -39,9 +42,9 @@ $ dotnet test CardValidation.IntegrationTests
 
 ---
 
-## 🧪 Test Types
+## Test Types
 
-### ✅ Unit Tests
+### Unit Tests
 
 Located in `CardValidation.UnitTests/`, these cover:
 
@@ -50,7 +53,7 @@ Located in `CardValidation.UnitTests/`, these cover:
 * Owner name rules
 * Expiry date checks
 
-### 🌐 Integration Tests
+### Integration Tests
 
 In `CardValidation.IntegrationTests/`, covering end-to-end flow by calling:
 
@@ -66,7 +69,7 @@ Tests validate:
 
 ---
 
-## ⚙️ GitHub Actions
+## GitHub Actions
 
 Pipeline: https://github.com/imssl/card_validation_tests/actions
 
@@ -77,6 +80,4 @@ Triggers with any git push to main branch. Pipeline:
 1. Builds the project
 2. Runs both unit and integration tests
 3. Uploads .trx test result files in a .zip file as a downloadable artifact
-
----
 
