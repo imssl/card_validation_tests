@@ -67,12 +67,12 @@ Triggers on push to `main`. It:
 
 1. Builds the project
 2. Runs both unit and integration tests
-3. Uploads `test-results.trx` as downloadable artifact
+3. Uploads .trx test result files in a .zip file as a downloadable artifact
 
 ---
 
 ## 📥 How to Run Locally
-
+In project root folder:
 ```bash
 # Build the solution
 $ dotnet build
@@ -86,7 +86,7 @@ $ dotnet test CardValidation.IntegrationTests
 
 ---
 
-## References
+## References for followed payment card conventions
 
 - [Wikipedia – Payment card number](https://en.wikipedia.org/wiki/Payment_card_number)
 - [IBM Docs – Luhn Algorithm](https://www.ibm.com/docs/en/zos/2.1.0?topic=applications-luhn-algorithm)
