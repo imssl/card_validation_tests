@@ -6,7 +6,8 @@ This project contains automated tests for the **CardValidation** API, including:
 
   This is verified through [C# Dev Kit extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) in VSCode.
   
-  ![image](https://github.com/user-attachments/assets/0fda925f-8c74-40fa-966a-7328330e901d)
+  ![image](https://github.com/user-attachments/assets/4ea208f6-c3e8-44ac-bf68-6e1f85843465)
+
 
 * Integration Tests
   
@@ -20,7 +21,7 @@ It is also integrated with GitHub Actions for CI, and includes test result artif
 ```
 card_validation_tests/
 ├── CardValidation.UnitTests               # Unit test project
-│   └── CardValidationUnitTests.cs         
+│   └── CardValidationUnitTests.cs         # Pure logic test coverage
 ├── CardValidation.IntegrationTests        # Integration test project
 │   └── CardValidationIntegrationTests.cs  # End-to-end HTTP-level tests
 ├── .github/workflows/
