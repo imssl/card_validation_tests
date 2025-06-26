@@ -4,7 +4,7 @@ Thank you for opportunity to submit this assignment below:
 
 https://github.com/manmarriverty/qa-home-assignment/tree/main
 
-This project contains automated tests for the **CardValidation** API, including:
+This project contains automated tests for the relevant app, including:
 
 * Unit Tests with 100% Coverage
 
