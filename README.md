@@ -16,19 +16,26 @@ It is also integrated with GitHub Actions for CI, and includes test result artif
 
 ---
 
-## 📁 Project Structure
+## 📥 How to Run Locally
+In project root folder:
+```bash
+# Build the solution
+$ dotnet build
 
+# Run unit tests
+$ dotnet test CardValidation.UnitTests
+
+# Run integration tests
+$ dotnet test CardValidation.IntegrationTests
 ```
-card_validation_tests/
-├── CardValidation.UnitTests               # Unit test project
-│   └── CardValidationUnitTests.cs         # Pure logic test coverage
-├── CardValidation.IntegrationTests        # Integration test project
-│   └── CardValidationIntegrationTests.cs  # End-to-end HTTP-level tests
-├── .github/workflows/
-│   └── docker-tests.yml                   # GitHub Actions pipeline setup
-├── Dockerfile                             # Containerization of the tests
-└── README.md                              # This file
-```
+
+---
+
+## References for followed payment card conventions
+
+- [Stripe Docs – CVC Verification](https://stripe.com/docs/testing#cvc-number)
+- [Wikipedia – Payment card number](https://en.wikipedia.org/wiki/Payment_card_number)
+
 
 ---
 
@@ -72,24 +79,4 @@ Triggers with any git push to main branch. Pipeline:
 3. Uploads .trx test result files in a .zip file as a downloadable artifact
 
 ---
-
-## 📥 How to Run Locally
-In project root folder:
-```bash
-# Build the solution
-$ dotnet build
-
-# Run unit tests
-$ dotnet test CardValidation.UnitTests
-
-# Run integration tests
-$ dotnet test CardValidation.IntegrationTests
-```
-
----
-
-## References for followed payment card conventions
-
-- [Stripe Docs – CVC Verification](https://stripe.com/docs/testing#cvc-number)
-- [Wikipedia – Payment card number](https://en.wikipedia.org/wiki/Payment_card_number)
 
