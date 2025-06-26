@@ -4,7 +4,7 @@ This project contains automated tests for the **CardValidation** API, including:
 
 * Unit Tests with 100% Coverage
 
-  This is verified through C# Dev Kit extension in VSCode.
+  This is verified through [C# Dev Kit extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) in VSCode.
   ![image](https://github.com/user-attachments/assets/0fda925f-8c74-40fa-966a-7328330e901d)
 
 * Integration Tests
@@ -18,23 +18,14 @@ It is also integrated with GitHub Actions for CI, and includes test result artif
 
 ```
 card_validation_tests/
-├── CardValidation.Core/                  # Business logic layer
-│   └── Services/
-│       └── CardValidationService.cs      # Core card validation rules
-├── CardValidation.Web/                  # ASP.NET Core Web API
-│   ├── Controllers/
-│   │   └── CardValidationController.cs   # Exposes /card/credit/validate endpoint
-│   └── Infrustructure/
-│       └── CreditCardValidationFilter.cs # Input validation middleware
-├── CardValidation.UnitTests/            # Unit test project
-│   └── Services/
-│       └── CardValidationServiceTests.cs # Pure logic test coverage
-├── CardValidation.IntegrationTests/     # Integration test project
-│   └── CardValidationApiTests.cs         # End-to-end HTTP-level tests
+├── CardValidation.UnitTests               # Unit test project
+│   └── CardValidationUnitTests.cs         
+├── CardValidation.IntegrationTests        # Integration test project
+│   └── CardValidationIntegrationTests.cs  # End-to-end HTTP-level tests
 ├── .github/workflows/
-│   └── docker-tests.yml                  # GitHub Actions workflow file
-├── TestResults/                          # Output test logs and coverage (gitignored)
-└── README.md                             # This file
+│   └── docker-tests.yml                   # GitHub Actions workflow file
+├── TestResults/                           # Output test logs and coverage (gitignored)
+└── README.md                              # This file
 ```
 
 ---
@@ -50,8 +41,6 @@ Located in `CardValidation.UnitTests/`, these cover:
 * Owner name rules
 * Expiry date checks
 
-These tests hit the `CardValidationService` class directly.
-
 ### 🌐 Integration Tests
 
 In `CardValidation.IntegrationTests/`, covering end-to-end flow by calling:
@@ -65,15 +54,6 @@ Tests validate:
 * Card types (Visa, MasterCard, Amex)
 * Bad requests for invalid input
 * Multi-error responses
-
----
-
-## ✅ Coverage
-
-* Unit tests have **100% line coverage** (see screenshot below).
-* Integration tests are not included in coverage stats.
-
-> 📷 *Insert screenshot of coverage-report/index.html here*
 
 ---
 
@@ -100,14 +80,6 @@ $ dotnet test CardValidation.UnitTests
 
 # Run integration tests
 $ dotnet test CardValidation.IntegrationTests
-
-# Run unit test with coverage
-$ dotnet test CardValidation.UnitTests \
-  --collect:"XPlat Code Coverage"
-
-# Generate HTML from coverage (after installing reportgenerator)
-$ reportgenerator -reports:**/coverage.cobertura.xml \
-  -targetdir:coverage-report -reporttypes:Html
 ```
 
 ---
