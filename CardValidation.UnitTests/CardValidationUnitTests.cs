@@ -13,7 +13,7 @@ namespace CardValidation.UnitTests
         [Theory]
         [InlineData("4539682995824395", true)]   // Visa
         [InlineData("5105105105105100", true)]   // MasterCard (51-55 range)
-        [InlineData("2221000000000009", true)]   // MasterCard (2221+ range)
+        [InlineData("2221000000000009", true)]   // MasterCard (2221+)
         [InlineData("378282246310005", true)]    // American Express
         [InlineData("6011111111111117", false)]  // Discover
         [InlineData("ABCDE12345", false)]        // Invalid
