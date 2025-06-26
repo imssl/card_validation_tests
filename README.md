@@ -25,8 +25,8 @@ card_validation_tests/
 ├── CardValidation.IntegrationTests        # Integration test project
 │   └── CardValidationIntegrationTests.cs  # End-to-end HTTP-level tests
 ├── .github/workflows/
-│   └── docker-tests.yml                   # GitHub Actions workflow file
-├── TestResults/                           # Output test logs and coverage (gitignored)
+│   └── docker-tests.yml                   # GitHub Actions pipeline setup
+├── Dockerfile                             # Containerization of the tests
 └── README.md                              # This file
 ```
 
