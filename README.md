@@ -88,8 +88,6 @@ $ dotnet test CardValidation.IntegrationTests
 
 ## References for followed payment card conventions
 
-- [Wikipedia – Payment card number](https://en.wikipedia.org/wiki/Payment_card_number)
-- [IBM Docs – Luhn Algorithm](https://www.ibm.com/docs/en/zos/2.1.0?topic=applications-luhn-algorithm)
 - [Stripe Docs – CVC Verification](https://stripe.com/docs/testing#cvc-number)
-- [Visa Acceptance Guide](https://usa.visa.com/dam/VCOM/download/merchants/visa-acceptance-guide-for-visa-merchants.pdf)
-- [PCI UX Guidelines](https://www.pcisecuritystandards.org/pdfs/PCI-UX-Design-Guidelines.pdf)
+- [Wikipedia – Payment card number](https://en.wikipedia.org/wiki/Payment_card_number)
+
