@@ -2,7 +2,9 @@
 
 Task: https://github.com/manmarriverty/qa-home-assignment/
 
-Thank you for the opportunity. This project contains automated tests for the relevant app, including:
+Thank you for the opportunity regarding QA Engineer position in Riverty. 
+
+This project contains automated tests for the relevant app, including:
 
 * Unit Tests with 100% Coverage
 
