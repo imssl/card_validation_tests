@@ -61,9 +61,11 @@ Tests validate:
 
 ## ⚙️ GitHub Actions
 
-Workflow: `.github/workflows/docker-tests.yml`
+Pipeline: https://github.com/imssl/card_validation_tests/actions
 
-Triggers on push to `main`. It:
+Configuration: `.github/workflows/docker-tests.yml`
+
+Triggers with any git push to main branch. Pipeline:
 
 1. Builds the project
 2. Runs both unit and integration tests
