@@ -1,10 +1,8 @@
-# QA Home Assignment Submission
+# Rivery QA Assignment Submission
 
-Thank you for opportunity to submit this assignment below:
+Task: https://github.com/manmarriverty/qa-home-assignment/tree/main
 
-https://github.com/manmarriverty/qa-home-assignment/tree/main
-
-This project contains automated tests for the relevant app, including:
+Thank you for the opportunity. This project contains automated tests for the relevant app, including:
 
 * Unit Tests with 100% Coverage
 
