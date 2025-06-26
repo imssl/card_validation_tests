@@ -1,65 +1,122 @@
-﻿using CardValidation.Core.Enums;
-using CardValidation.Core.Services.Interfaces;
-using System.Text.RegularExpressions;
+using System;
+using Xunit;
+using CardValidation.Core.Services;
+using CardValidation.Core.Enums;
 
-namespace CardValidation.Core.Services
+namespace CardValidation.UnitTests
 {
-    public class CardValidationService : ICardValidationService
+    /// <summary>
+    /// Contains unit tests for the <see cref="CardValidationService"/> class, validating card number format, 
+    /// payment system type identification, owner name validation, CVC validation, and issue date validation.
+    /// </summary>
+    public class CardValidationServiceTests
     {
-        private static bool IsVisa(string cardNumber) => Regex.Match(cardNumber, @"^4[0-9]{12}(?:[0-9]{3})?$").Success;
+        private readonly CardValidationService service = new();
 
-        private static bool IsMasterCard(string cardNumber) =>
-            Regex.Match(cardNumber, @"^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$").Success;
-
-        private static bool IsAmericanExpress(string cardNumber) => Regex.Match(cardNumber, @"^3[47][0-9]{13}$").Success;
-
-
-        public bool ValidateOwner(string owner) => Regex.Match(owner, @"^((?:[A-Za-z]+ ?){1,3})$").Success;     
-
-        public bool ValidateIssueDate(string issueDate)
+        /// <summary>
+        /// Tests whether <see cref="CardValidationService.ValidateNumber(string)"/> returns the expected result
+        /// for various card numbers, including known valid formats (Visa, MasterCard, American Express) and invalid ones.
+        /// </summary>
+        /// <param name="number">The credit card number to validate.</param>
+        /// <param name="expected">The expected validation result.</param>
+        [Theory]
+        [InlineData("4539682995824395", true)]   // Visa
+        [InlineData("5105105105105100", true)]   // MasterCard (51-55 range)
+        [InlineData("2221000000000009", true)]   // MasterCard (2221+)
+        [InlineData("378282246310005", true)]    // American Express
+        [InlineData("6011111111111117", false)]  // Discover (unsupported)
+        [InlineData("ABCDE12345", false)]        // Invalid format
+        public void ValidateNumber_returns_expected(string number, bool expected)
         {
-            var pattern = @"^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$";
-
-            if (Regex.Match(issueDate, pattern).Success)
-            {
-                var dateValues = Regex.Split(issueDate, pattern).Where(t=>t != string.Empty).ToList();
-
-                var month = int.Parse(dateValues[0]);
-                var year = int.Parse(dateValues[1]);
-
-                var issueDateTime = new DateTime(year / 1000 > 0 ? year : 2000 + year, month, 1);
-
-                return DateTime.UtcNow < issueDateTime;
-            }
-
-            return false;
+            Assert.Equal(expected, service.ValidateNumber(number));
         }
 
-        public bool ValidateCvc(string cvc) => Regex.Match(cvc, @"^[0-9]{3,4}$").Success;
-
-        public bool ValidateNumber(string cardNumber)
+        /// <summary>
+        /// Tests whether <see cref="CardValidationService.GetPaymentSystemType(string)"/> correctly identifies
+        /// the payment system type for valid card numbers.
+        /// </summary>
+        /// <param name="number">The credit card number to evaluate.</param>
+        /// <param name="expected">The expected <see cref="PaymentSystemType"/> value.</param>
+        [Theory]
+        [InlineData("4539682995824395", PaymentSystemType.Visa)]
+        [InlineData("5105105105105100", PaymentSystemType.MasterCard)]
+        [InlineData("378282246310005", PaymentSystemType.AmericanExpress)]
+        public void GetPaymentSystemType_returns_correct_enum(string number, PaymentSystemType expected)
         {
-            if (IsVisa(cardNumber)) { return true; }
-
-            if (IsMasterCard(cardNumber)) { return true; }
-
-            if (IsAmericanExpress(cardNumber)) { return true; }
-
-            return false;
+            var result = service.GetPaymentSystemType(number);
+            Assert.Equal(expected, result);
         }
 
-        public PaymentSystemType GetPaymentSystemType(string cardNumber)
+        /// <summary>
+        /// Verifies that <see cref="CardValidationService.GetPaymentSystemType(string)"/> throws
+        /// a <see cref="NotImplementedException"/> when given an unsupported card number.
+        /// </summary>
+        [Fact]
+        public void GetPaymentSystemType_invalid_number_throws()
         {
-            if (IsVisa(cardNumber))
-            { return PaymentSystemType.Visa; }
+            Assert.Throws<NotImplementedException>(() =>
+                service.GetPaymentSystemType("6011111111111117"));
+        }
 
-            if (IsMasterCard(cardNumber))
-            { return PaymentSystemType.MasterCard; }
+        /// <summary>
+        /// Tests whether <see cref="CardValidationService.ValidateOwner(string)"/> correctly validates
+        /// card owner names, allowing only letters and spaces.
+        /// </summary>
+        /// <param name="owner">The owner name to validate.</param>
+        /// <param name="expected">The expected validation result.</param>
+        [Theory]
+        [InlineData("John Doe", true)]
+        [InlineData("Anna Maria Smith", true)]
+        [InlineData("1234", false)]
+        [InlineData("John123", false)]
+        [InlineData("", false)]
+        public void ValidateOwner_returns_expected(string owner, bool expected)
+        {
+            Assert.Equal(expected, service.ValidateOwner(owner));
+        }
 
-            if (IsAmericanExpress(cardNumber))
-            { return PaymentSystemType.AmericanExpress; }
+        /// <summary>
+        /// Validates that <see cref="CardValidationService.ValidateCvc(string)"/> accepts only CVC codes 
+        /// that are 3 or 4 digits long.
+        /// </summary>
+        /// <param name="cvc">The CVC code to validate.</param>
+        /// <param name="expected">The expected validation result.</param>
+        [Theory]
+        [InlineData("123", true)]
+        [InlineData("9876", true)]   // American Express (4-digit CVC)
+        [InlineData("12", false)]
+        [InlineData("12A", false)]
+        public void ValidateCvc_returns_expected(string cvc, bool expected)
+        {
+            Assert.Equal(expected, service.ValidateCvc(cvc));
+        }
 
-            throw new NotImplementedException();
+        /// <summary>
+        /// Tests whether <see cref="CardValidationService.ValidateIssueDate(string)"/> accepts
+        /// future dates in valid formats such as MM/yyyy and MM/yy.
+        /// </summary>
+        /// <param name="futureDate">The future expiry date to validate.</param>
+        [Theory]
+        [InlineData("01/2050")]
+        [InlineData("12/50")]
+        public void ValidateIssueDate_future_dates_are_valid(string futureDate)
+        {
+            Assert.True(service.ValidateIssueDate(futureDate));
+        }
+
+        /// <summary>
+        /// Tests whether <see cref="CardValidationService.ValidateIssueDate(string)"/> returns false
+        /// for past dates, invalid formats, or empty strings.
+        /// </summary>
+        /// <param name="input">The input date string to validate.</param>
+        [Theory]
+        [InlineData("01/10")]
+        [InlineData("13/30")]
+        [InlineData("invalid")]
+        [InlineData("")]
+        public void ValidateIssueDate_false_for_invalid_or_past(string input)
+        {
+            Assert.False(service.ValidateIssueDate(input));
         }
     }
 }
