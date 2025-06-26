@@ -14,7 +14,7 @@ namespace CardValidation.UnitTests
         /// <summary>
         /// System-under-test instance reused by all cases.
         /// </summary>
-        private readonly CardValidationService _service = new();
+        private CardValidationService _service = new();
 
         /// <summary>
         /// Verify card-number patterns are correctly recognised or rejected.
