@@ -1,10 +1,10 @@
-# Home Assignment
+# Task
 
-You will be required to write unit tests and automated tests for a payment application to demonstrate your skills. 
+Requirement is to write unit tests and automated tests for a payment application. 
 
 # Application information 
 
-It’s an small microservice that validates provided Credit Card data and returns either an error or type of credit card application. 
+It’s a small microservice that validates provided Credit Card data and returns either an error or type of credit card application. 
 
 # API Requirements 
 
