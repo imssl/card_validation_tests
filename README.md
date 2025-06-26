@@ -1,6 +1,6 @@
 # Riverty QA Assignment Submission
 
-Task: https://github.com/manmarriverty/qa-home-assignment/tree/main
+Task: https://github.com/manmarriverty/qa-home-assignment/
 
 Thank you for the opportunity. This project contains automated tests for the relevant app, including:
 
